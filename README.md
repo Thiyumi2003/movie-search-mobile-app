@@ -2,6 +2,9 @@
 
 A React Native mobile application built with Expo for searching movies and managing favorites.
 <img src="./screenshots/1.jpeg" width="300" alt="Home Screen">
+<img src="./screenshots/2.jpeg" width="300" alt="home Screen">
+<img src="./screenshots/3.jpeg" width="300" alt="home Screen">
+<img src="./screenshots/4.jpeg" width="300" alt="profile Screen">
 
 ## Features
 
