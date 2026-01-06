@@ -1,7 +1,7 @@
 # Movie Search Mobile App
 
 A React Native mobile application built with Expo for searching movies and managing favorites.
-<img src="./screenshots/1.png" width="300" alt="Home Screen">
+<img src="./screenshots/1.jpeg" width="300" alt="Home Screen">
 
 ## Features
 
@@ -64,23 +64,6 @@ expo start
 2. Scan the QR code with:
    - **iOS**: Use the Camera app
    - **Android**: Use the Expo Go app
-
-## Project Structure
-
-```
-├── screens/
-│   ├── HomeScreen.js       # Main search & category discovery
-│   ├── LoginScreen.js      # Login authentication
-│   ├── RegisterScreen.js   # User registration
-│   └── ProfileScreen.js    # User profile & favorites
-├── utils/
-│   └── storage.js          # AsyncStorage handlers for auth & favorites
-├── styles/
-│   └── commonStyles.js     # Shared styles & colors
-├── navigation/
-│   └── RootNavigator.js    # App navigation structure
-└── App.js                  # App entry point
-```
 
 ## How to Use
 
