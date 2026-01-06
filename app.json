@@ -1,0 +1,24 @@
+{
+  "expo": {
+    "name": "Movie Search",
+    "slug": "movie-search-app",
+    "version": "1.0.0",
+    "sdkVersion": "54.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "backgroundColor": "#2196F3",
+      "resizeMode": "contain"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.moviesearch.app"
+    },
+    "android": {
+      "package": "com.moviesearch.app",
+      "adaptiveIcon": {
+        "backgroundColor": "#2196F3"
+      }
+    }
+  }
+}
