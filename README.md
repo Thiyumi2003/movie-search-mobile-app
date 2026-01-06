@@ -1,9 +1,14 @@
 # Movie Search Mobile App
 
-A React Native mobile application built with Expo for searching movies and managing favorites.
+A beautiful React Native mobile application built with Expo for searching movies, discovering recommendations by category, and managing your favorite films. Features a modern glass-morphism UI design with smooth animations and intuitive navigation.
+
+## Screenshots
+
+<div style="display: flex; gap: 10px;">
 <img src="./screenshots/1.jpeg" width="200" alt="Home Screen">
-<img src="./screenshots/3.jpeg" width="200" alt="home Screen">
-<img src="./screenshots/4.jpeg" width="200" alt="profile Screen">
+<img src="./screenshots/3.jpeg" width="200" alt="Home Screen">
+<img src="./screenshots/4.jpeg" width="200" alt="Profile Screen">
+</div>
 
 ## Features
 
@@ -87,26 +92,75 @@ expo start
 - Login with credentials
 - Logout from the app
 
-## Build for Production
+## Deployment & Build
 
-### Android APK
+This app is deployed using **EAS Build** (Expo Application Services).
+
+### Quick Links
+- **Project Dashboard**: [https://expo.dev/accounts/thiyumi/projects/movie-search-app](https://expo.dev/accounts/thiyumi/projects/movie-search-app)
+- **Latest Android Build**: Available on Expo dashboard
+
+### Build Android APK (Preview/Internal Testing)
 ```bash
-expo build:android
+eas build -p android --profile preview
 ```
 
-### iOS
+### Build Production APK/AAB
 ```bash
-expo build:ios
+eas build -p android --profile production
+```
+
+### Build iOS App
+```bash
+eas build -p ios --profile preview
+```
+
+### Prerequisites for Building
+1. Install EAS CLI:
+```bash
+npm install -g eas-cli
+```
+
+2. Login to Expo:
+```bash
+eas login
+```
+
+3. Configure the project (already done):
+```bash
+eas build:configure
+```
+
+### Download & Share
+After building, you'll receive:
+- A direct download link for the APK
+- QR code for easy installation
+- Build status page on expo.dev
+
+Share the build link with testers or users - they can install directly on Android devices without Google Play Store.
+
+### Submit to App Stores
+
+**Google Play Store:**
+```bash
+eas submit -p android
+```
+
+**Apple App Store:**
+```bash
+eas submit -p ios
 ```
 
 ## Technologies Used
 
-- React Native 0.74
-- Expo SDK 54
-- React Navigation (Stack & Tab)
-- AsyncStorage (local data persistence)
-- expo-linear-gradient (glass-morphism UI)
-- OMDB API (movie database)
+- **React Native** 0.81.5
+- **Expo SDK** 54.0.0
+- **React** 19.1.0
+- **React Navigation** (Stack Navigator)
+- **AsyncStorage** (local data persistence)
+- **expo-linear-gradient** (glass-morphism UI effects)
+- **OMDB API** (movie database)
+- **EAS Build** (deployment & distribution)
 
 ## Supported Platforms
 
