@@ -12,8 +12,7 @@ import {
 } from 'react-native';
 import { storage } from '../utils/storage';
 import { commonStyles, colors } from '../styles/commonStyles';
-
-const API_KEY = 'd5a82b51';
+import { searchMovieByTitle, getMoviesForKeywords } from '../utils/tmdb';
 
 export default function HomeScreen({ navigation }) {
   const [movieName, setMovieName] = useState('');
@@ -52,15 +51,8 @@ export default function HomeScreen({ navigation }) {
     if (!category) return;
 
     try {
-      const moviePromises = category.keywords.map(keyword =>
-        fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&t=${keyword}`)
-          .then(res => res.json())
-          .then(data => data.Response !== 'False' ? data : null)
-      );
-
-      const results = await Promise.all(moviePromises);
-      const validMovies = results.filter(m => m !== null);
-      setCategoryMovies(validMovies);
+      const results = await getMoviesForKeywords(category.keywords);
+      setCategoryMovies(results);
     } catch (error) {
       console.error('Failed to load category movies:', error);
     }
@@ -74,12 +66,8 @@ export default function HomeScreen({ navigation }) {
 
     setLoading(true);
     try {
-      const response = await fetch(
-        `https://www.omdbapi.com/?apikey=${API_KEY}&t=${movieName}`
-      );
-      const movie = await response.json();
-
-      if (movie.Response === 'False') {
+      const movie = await searchMovieByTitle(movieName);
+      if (!movie) {
         Alert.alert('Not Found', 'Movie not found!');
       } else {
         setMovies([movie, ...movies]);
@@ -178,6 +166,13 @@ export default function HomeScreen({ navigation }) {
         onPress={() => addFavourite(movie.Title)}
       >
         <Text style={commonStyles.actionButtonText}>❤️ Favourite</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={[commonStyles.actionButton, { backgroundColor: colors.secondary }]}
+        onPress={() => navigation.navigate('Theater', { movieTitle: movie.Title })}
+      >
+        <Text style={commonStyles.actionButtonText}>🎬 Find Theaters</Text>
       </TouchableOpacity>
     </View>
   );

@@ -14,7 +14,7 @@ A beautiful React Native mobile application built with Expo for searching movies
 
 ### Core
 - User authentication (Login/Register)
-- Search movies using OMDB API
+- Search movies using TMDB API
 - View movie details (poster, rating, plot, director, genre, etc.)
 - Add movies to favorites
 - User profile with favorite movies list
@@ -32,6 +32,11 @@ A beautiful React Native mobile application built with Expo for searching movies
 - Responsive sidebar navigation
 - Error messages and user alerts
 - Loading indicators during API calls
+
+### GPS & Theaters
+- Nearby theaters via OpenStreetMap Overpass (no API key required)
+- Optional Google Places-powered search for theaters likely showing a selected movie
+   - Enable by setting `EXPO_PUBLIC_GOOGLE_PLACES_API_KEY`
 
 ## Prerequisites
 
@@ -151,6 +156,20 @@ eas submit -p android
 eas submit -p ios
 ```
 
+### Direct Android APK (No Play Store)
+- Configure APK builds: ensure `preview` profile in [eas.json](eas.json) sets android `buildType` to `apk`.
+- Build APK: `eas build -p android --profile preview`
+- Download link: after build completes, open the Expo build page link to download the APK.
+- Install: enable "Install unknown apps" on the device, then install the APK.
+
+### iOS Testing via Expo Go
+- Install Expo Go from the App Store.
+- Start dev server: `npx expo start --tunnel`.
+- Scan the QR code with the Camera (iOS) to open in Expo Go.
+- Note: some native modules (e.g., full map view) may require a Dev Client. Optional:
+   - Build Dev Client: `eas build -p ios --profile development`
+   - Run with Dev Client: `npx expo start --dev-client`
+
 ## Technologies Used
 
 - **React Native** 0.81.5
@@ -159,7 +178,7 @@ eas submit -p ios
 - **React Navigation** (Stack Navigator)
 - **AsyncStorage** (local data persistence)
 - **expo-linear-gradient** (glass-morphism UI effects)
-- **OMDB API** (movie database)
+- **TMDB API** (movie database)
 - **EAS Build** (deployment & distribution)
 
 ## Supported Platforms
@@ -178,9 +197,15 @@ Data is never sent to external servers and remains on the user's device.
 
 ## API Key
 
-The app uses OMDB API for fetching movie data. The API key is included in the code:
-- API Key: `d5a82b51`
-- Get your own free API key at [http://www.omdbapi.com/](http://www.omdbapi.com/)
+The app uses The Movie Database (TMDB) API for fetching movie data.
+- The TMDB API key is currently defined in `utils/tmdb.js` as `TMDB_API_KEY`.
+- You can generate your own key at: https://www.themoviedb.org/settings/api
+- Optional: move the key to an environment variable like `EXPO_PUBLIC_TMDB_API_KEY` and read it in `utils/tmdb.js` for safer distribution.
+
+Optionally, enable Google Places for showtimes-oriented theater search:
+- Create a key in Google Cloud Console and enable Places API
+- Add it to your environment as `EXPO_PUBLIC_GOOGLE_PLACES_API_KEY`
+- On native (Android/iOS), Theater screen will use this to search for `${movie} showtimes` near you and list relevant theaters
 
 ## Future Features
 
@@ -202,8 +227,9 @@ The app uses OMDB API for fetching movie data. The API key is included in the co
 
 ### API errors
 - Verify internet connection
-- Check OMDB API key is valid
-- Some movie titles may not exist in OMDB database
+- Check TMDB API key is valid
+- Some movie titles may not exist or have limited data on TMDB
+- If Google showtimes search fails or is disabled, the app falls back to generic nearby theaters
 
 ### AsyncStorage not persisting
 - Clear app cache and reinstall

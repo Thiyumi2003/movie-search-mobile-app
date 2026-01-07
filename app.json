@@ -12,13 +12,20 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.moviesearch.app"
+      "bundleIdentifier": "com.moviesearch.app",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "This app needs access to your location to find nearby movie theaters."
+      }
     },
     "android": {
       "package": "com.moviesearch.app",
       "adaptiveIcon": {
         "backgroundColor": "#2196F3"
-      }
+      },
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION"
+      ]
     },
     "extra": {
       "eas": {
